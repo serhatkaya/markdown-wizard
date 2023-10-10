@@ -8,7 +8,7 @@ class Alignment {
    * @static
    * @returns {number} - The LEFT alignment constant.
    */
-  static get LEFT() {
+  static get LEFT(): number {
     return -1;
   }
 
@@ -17,7 +17,7 @@ class Alignment {
    * @static
    * @returns {number} - The CENTER alignment constant.
    */
-  static get CENTER() {
+  static get CENTER(): number {
     return 0;
   }
 
@@ -26,7 +26,7 @@ class Alignment {
    * @static
    * @returns {number} - The RIGHT alignment constant.
    */
-  static get RIGHT() {
+  static get RIGHT(): number {
     return 1;
   }
 }
@@ -36,6 +36,8 @@ class Alignment {
  * @class
  */
 class MarkdownWizard {
+  private markdown: string;
+
   /**
    * Creates a new instance of MarkdownWizard.
    * @constructor
@@ -48,7 +50,7 @@ class MarkdownWizard {
    * Creates a new MarkdownWizard instance for composing a block of content.
    * @returns {MarkdownWizard} - A new MarkdownWizard instance.
    */
-  block() {
+  block(): MarkdownWizard {
     return new MarkdownWizard();
   }
 
@@ -57,7 +59,7 @@ class MarkdownWizard {
    * @param {string} text - The text to add as a paragraph.
    * @returns {MarkdownWizard} - The current MarkdownWizard instance for method chaining.
    */
-  p(text) {
+  p(text: string): MarkdownWizard {
     return this.writeln(text).br();
   }
 
@@ -68,7 +70,7 @@ class MarkdownWizard {
    * @param {number} [level=0] - The indentation level.
    * @returns {MarkdownWizard} - The current MarkdownWizard instance for method chaining.
    */
-  h1(header, underline = false, level = 0) {
+  h1(header: string, underline: boolean = false, level: number = 0): MarkdownWizard {
     header = this.singleLine(header);
 
     const result = this.writeln(`# ${header}`, level);
@@ -87,7 +89,7 @@ class MarkdownWizard {
    * @param {number} [level=0] - The indentation level.
    * @returns {MarkdownWizard} - The current MarkdownWizard instance for method chaining.
    */
-  h2(header, underline = false, level = 0) {
+  h2(header: string, underline: boolean = false, level: number = 0): MarkdownWizard {
     header = this.singleLine(header);
 
     const result = this.writeln(`## ${header}`, level);
@@ -104,7 +106,7 @@ class MarkdownWizard {
    * @param {string} header - The header text.
    * @returns {MarkdownWizard} - The current MarkdownWizard instance for method chaining.
    */
-  h3(header) {
+  h3(header: string): MarkdownWizard {
     header = this.singleLine(header);
 
     return this.writeln("### " + header).br();
@@ -115,7 +117,7 @@ class MarkdownWizard {
    * @param {string} text - The blockquote text.
    * @returns {MarkdownWizard} - The current MarkdownWizard instance for method chaining.
    */
-  blockquote(text) {
+  blockquote(text: string): MarkdownWizard {
     const lines = text.split("\n");
     const newLines = lines.map((line) => {
       return "> " + line.trim();
@@ -129,7 +131,7 @@ class MarkdownWizard {
    * Appends a horizontal rule (hr) to the Markdown content.
    * @returns {MarkdownWizard} - The current MarkdownWizard instance for method chaining.
    */
-  hr() {
+  hr(): MarkdownWizard {
     return this.p("---------------------------------------");
   }
 
@@ -139,7 +141,7 @@ class MarkdownWizard {
    * @param {string} [lang=""] - The language identifier for syntax highlighting.
    * @returns {MarkdownWizard} - The current MarkdownWizard instance for method chaining.
    */
-  codeBlock(code, lang = "") {
+  codeBlock(code: string, lang: string = ""): MarkdownWizard {
     return this.writeln("```" + lang)
       .writeln(code)
       .writeln("```")
@@ -153,7 +155,7 @@ class MarkdownWizard {
    * @param {Array} [alignments=[]] - An array of text alignment options for columns.
    * @returns {MarkdownWizard} - The current MarkdownWizard instance for method chaining.
    */
-  table(columns, rows, alignments = []) {
+  table(columns: string[], rows: string[][], alignments: number[] = []): MarkdownWizard {
     this.writeln("|" + columns.join("|") + "|");
 
     this.write("|");
@@ -185,7 +187,7 @@ class MarkdownWizard {
    * Appends a line break to the Markdown content.
    * @returns {MarkdownWizard} - The current MarkdownWizard instance for method chaining.
    */
-  br() {
+  br(): MarkdownWizard {
     this.write("\n");
     return this;
   }
@@ -195,7 +197,7 @@ class MarkdownWizard {
    * @param {string} code - The text to be formatted as inline code.
    * @returns {string} - The formatted inline code.
    */
-  inlineCode(code) {
+  inlineCode(code: string): string {
     return "`" + code + "`";
   }
 
@@ -204,7 +206,7 @@ class MarkdownWizard {
    * @param {string} string - The text to be formatted as italic.
    * @returns {string} - The formatted italic text.
    */
-  inlineItalic(string) {
+  inlineItalic(string: string): string {
     return "*" + string + "*";
   }
 
@@ -213,7 +215,7 @@ class MarkdownWizard {
    * @param {string} string - The text to be formatted as bold.
    * @returns {string} - The formatted bold text.
    */
-  inlineBold(string) {
+  inlineBold(string: string): string {
     return "**" + string + "**";
   }
 
@@ -224,7 +226,7 @@ class MarkdownWizard {
    * @param {string} [title=null] - The optional link title.
    * @returns {string} - The Markdown link.
    */
-  link(url, text, title = null) {
+  link(url: string, text: string, title: string | null = null): string {
     if (title) {
       return `[${text}](${url} "${title}")`;
     }
@@ -239,7 +241,7 @@ class MarkdownWizard {
    * @param {string} [title=null] - The optional image title.
    * @returns {string} - The Markdown image tag.
    */
-  image(url, altText, title = null) {
+  image(url: string, altText: string, title: string | null = null): string {
     if (title) {
       return `![${altText}](${url} "${title}")`;
     }
@@ -251,7 +253,7 @@ class MarkdownWizard {
    * Gets the generated Markdown content.
    * @returns {string} - The generated Markdown content.
    */
-  getMarkdown() {
+  getMarkdown(): string {
     return this.markdown.trim();
   }
 
@@ -261,7 +263,7 @@ class MarkdownWizard {
    * @param {number} [level=0] - The indentation level.
    * @returns {MarkdownWizard} - The current MarkdownWizard instance for method chaining.
    */
-  writeln(string, level = 0) {
+  writeln(string: string, level: number = 0): MarkdownWizard {
     this.write(string, level);
     this.br();
     return this;
@@ -273,7 +275,7 @@ class MarkdownWizard {
    * @param {number} [level=0] - The indentation level.
    * @returns {MarkdownWizard} - The current MarkdownWizard instance for method chaining.
    */
-  write(string, level = 0) {
+  write(string: string, level: number = 0): MarkdownWizard {
     const tabLevel = "  ".repeat(level);
     this.markdown += tabLevel + string;
     return this;
@@ -284,7 +286,7 @@ class MarkdownWizard {
    * @param {string} string - The input string.
    * @returns {string} - The processed single-line string.
    */
-  singleLine(string) {
+  singleLine(string: string): string {
     const result = string.replace(/(\r\n|\r|\n|\s)\s*/g, " ").trim();
     if (typeof result !== "string") {
       throw new Error("Unexpected result");
@@ -296,7 +298,7 @@ class MarkdownWizard {
    * Gets the Markdown content as a string.
    * @returns {string} - The generated Markdown content.
    */
-  toString() {
+  toString(): string {
     return this.getMarkdown();
   }
 
@@ -306,7 +308,7 @@ class MarkdownWizard {
    * @param {Array} levels - An optional array of indentation levels for each item.
    * @returns {MarkdownWizard} - The current MarkdownWizard instance for method chaining.
    */
-  bulletedList(list, levels = []) {
+  bulletedList(list: string[], levels: number[] = []): MarkdownWizard {
     list.forEach((item, index) => {
       let prefix = "- ";
       for (let i = 0; i < levels[index]; i++) {
@@ -324,7 +326,7 @@ class MarkdownWizard {
    * @param {Array} levels - An optional array of indentation levels for each item.
    * @returns {MarkdownWizard} - The current MarkdownWizard instance for method chaining.
    */
-  orderedList(list, levels = []) {
+  orderedList(list: string[], levels: number[] = []): MarkdownWizard {
     list.forEach((item, index) => {
       const level = levels[index] || 0;
       const indentation = "  ".repeat(level);
@@ -340,9 +342,7 @@ class MarkdownWizard {
    * @param {boolean} [initiallyCollapsed=false] - Whether the section is initially collapsed.
    * @returns {MarkdownWizard} - The current MarkdownWizard instance for method chaining.
    */
-  collapsible(title, initiallyCollapsed = false, level = 0) {
-    // Calculate the appropriate indentation
-
+  collapsible(title: string, initiallyCollapsed: boolean = false, level: number = 0): MarkdownWizard {
     // Determine the initial state of the collapsible section
     const collapseIndicator = initiallyCollapsed
       ? "<details closed>"
@@ -362,7 +362,7 @@ class MarkdownWizard {
    * Ends the current collapsible section in the Markdown content.
    * @returns {MarkdownWizard} - The current MarkdownWizard instance for method chaining.
    */
-  endCollapsible() {
+  endCollapsible(): MarkdownWizard {
     this.writeln("  </details>");
     return this;
   }
@@ -373,7 +373,7 @@ class MarkdownWizard {
    * @param {...string} params - Parameters specific to the badge type.
    * @returns {MarkdownWizard} - The current MarkdownWizard instance for method chaining.
    */
-  badge(type, ...params) {
+  badge(type: string, ...params: string[]): MarkdownWizard {
     let badgeMarkdown = "";
 
     switch (type.toLowerCase()) {
@@ -400,4 +400,4 @@ class MarkdownWizard {
   }
 }
 
-module.exports = { Alignment, MarkdownWizard };
+export { Alignment, MarkdownWizard };

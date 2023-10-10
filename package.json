@@ -1,6 +1,6 @@
 {
   "name": "markdown-wizard",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A markdown wizard to generate Markdown documentations easily with JavaScript.",
   "main": "main.js",
   "scripts": {
@@ -28,7 +28,10 @@
   "devDependencies": {
     "copy-webpack-plugin": "^11.0.0",
     "terser-webpack-plugin": "^5.3.9",
+    "ts-loader": "^9.5.0",
+    "typescript": "^5.2.2",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
-  }
+  },
+  "types": "markdown-wizard.d.ts"
 }

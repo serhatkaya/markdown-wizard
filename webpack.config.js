@@ -3,10 +3,10 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-  entry: "./src/main.js",
+  entry: "./src/main.ts",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "markdown-wizard.js",
+    filename: "main.js",
     library: "sk",
     libraryTarget: "umd",
     umdNamedDefine: true,
@@ -27,6 +27,10 @@ module.exports = {
           from: path.resolve(__dirname, "package.json"),
           to: path.resolve(__dirname, "dist"),
         },
+        {
+          from: path.resolve(__dirname, "src/markdown-wizard.d.ts"),
+          to: path.resolve(__dirname, "dist"),
+        },
       ],
     }),
   ],
@@ -37,5 +41,17 @@ module.exports = {
         extractComments: true,
       }),
     ],
+  },
+  module: { // Add the "module" object for specifying rules
+    rules: [
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        use: "ts-loader",
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".js", ".ts"], // Allow importing .ts files without specifying the extension
   },
 };
