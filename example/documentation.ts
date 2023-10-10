@@ -34,7 +34,17 @@ builder.h3("With NPM");
 builder.codeBlock("npm install markdown-wizard");
 builder.h3("With UNPKG");
 builder.codeBlock(
-  `<script src="https://www.unpkg.com/markdown-wizard@1.0.2/main.js"></script>`,
+  `<script src="https://www.unpkg.com/markdown-wizard@1.0.3/main.js"></script>`,
+  "html"
+);
+builder.p("Usage when installed with UNPKG");
+builder.codeBlock(
+  `
+<script>
+  const wiz = new sk.MarkdownWizard()
+  wiz.h1("Rest is up to you :)")
+</script>
+`,
   "html"
 );
 

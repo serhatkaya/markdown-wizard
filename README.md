@@ -36,7 +36,18 @@ npm install markdown-wizard
 ### With UNPKG
 
 ```html
-<script src="https://www.unpkg.com/markdown-wizard@1.0.2/main.js"></script>
+<script src="https://www.unpkg.com/markdown-wizard@1.0.3/main.js"></script>
+```
+
+Usage when installed with UNPKG
+
+```html
+
+<script>
+  const wiz = new sk.MarkdownWizard()
+  wiz.h1("Rest is up to you :)")
+</script>
+
 ```
 
 ## Creating an Instance
