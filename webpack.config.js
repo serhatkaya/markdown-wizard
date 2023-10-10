@@ -42,7 +42,7 @@ module.exports = {
       }),
     ],
   },
-  module: { // Add the "module" object for specifying rules
+  module: {
     rules: [
       {
         test: /\.ts$/,
@@ -52,6 +52,6 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".js", ".ts"], // Allow importing .ts files without specifying the extension
+    extensions: [".js", ".ts"], 
   },
 };
