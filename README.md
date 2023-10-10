@@ -23,6 +23,22 @@ Navigate to:
 -  [Collapsible Sections](#collapsible-sections)
 -  [Badge](#badge)
 
+## Installing
+
+You can install `MarkdownWizard` either through npm or unpkg.
+
+### With NPM
+
+```
+npm install markdown-wizard
+```
+
+### With UNPKG
+
+```html
+<script src="https://www.unpkg.com/markdown-wizard@1.0.2/main.js"></script>
+```
+
 ## Creating an Instance
 
 To get started with the `MarkdownWizard`, create a new instance:

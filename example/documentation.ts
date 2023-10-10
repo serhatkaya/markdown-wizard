@@ -1,4 +1,4 @@
-const { MarkdownWizard } = require("./../src/main.js");
+import { MarkdownWizard } from "./../src/main";
 
 const builder = new MarkdownWizard();
 
@@ -26,6 +26,17 @@ builder.bulletedList([
   " [Collapsible Sections](#collapsible-sections)",
   " [Badge](#badge)",
 ]);
+
+builder.h2("Installing");
+builder.p("You can install `MarkdownWizard` either through npm or unpkg.");
+
+builder.h3("With NPM");
+builder.codeBlock("npm install markdown-wizard");
+builder.h3("With UNPKG");
+builder.codeBlock(
+  `<script src="https://www.unpkg.com/markdown-wizard@1.0.2/main.js"></script>`,
+  "html"
+);
 
 // Documenting Creating an Instance
 builder.h2("Creating an Instance");
